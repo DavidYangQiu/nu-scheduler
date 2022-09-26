@@ -1,5 +1,7 @@
 # Class Schedule Generator
 
+Public Site: https://nu-schedule-e072e.web.app/
+
 David Qiu
 
 yangqiu2024@u.northwestern.edu;
