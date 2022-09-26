@@ -1,4 +1,10 @@
-# React Vitest Template
+# Class Schedule Generator
+
+David Qiu
+yangqiu2024@u.northwestern.edu;
+NU, FALL, 2022
+
+.....
 
 A starter template for building React apps with Vite. Includes Vitest for unit testing and
 a hefty .gitignore file.
