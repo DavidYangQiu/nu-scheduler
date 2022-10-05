@@ -1,3 +1,4 @@
+import { useState } from 'react';
 
 import Banner from './components/Banner';
 import CourseList from './components/CourseList';
@@ -5,8 +6,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useJsonQuery } from './utilities/fetch'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { useQuery } from '@tanstack/react-query';
+import TermPage from './components/CourseList';
 
+//import pageFilter from "./Components/pageFilter";
 
 // Display Current Time 
 // const App = () => {
@@ -64,27 +66,32 @@ import { useQuery } from '@tanstack/react-query';
 // );
 
 
-const queryClient = new QueryClient();
 
 const Main = () => {
-  const [schedule, isLoading, error] = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
+  const [data, isLoading, error] = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
 
+  
   if (error) return <h1>Error loading user data: {`${error}`}</h1>;
   if (isLoading) return <h1>Loading user data...</h1>;
-  if (!schedule) return <h1>No user data found</h1>;
+  if (!data) return <h1>No user data found</h1>;
 
   return (
     <div className="container">
-      <Banner title={schedule.title} />
-      <CourseList courses={schedule.courses} />
+      <h1>{data.title} </h1> 
+      
+      <TermPage courses={data.courses} />
     </div>
   );
 }
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Main/>
+      <div className="container">
+          <Main/>
+      </div>
+
     </QueryClientProvider>
   );
 };
