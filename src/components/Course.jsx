@@ -1,15 +1,14 @@
-import "./Course.css";
-
-const Course = ({ course }) => {
-    return (
-        <div className="card m-1 p-2 h-100">
-            <div className="card-body">
-                <h5 className="card-title text-center">{course.term} CS {course.number}</h5>
-                <div className="card-text text-center">{course.title}</div>
-                <div className="card-footer bg-white">{course.meets}</div>
-            </div>
+const Course = ({course, id, selected, toggleSelected}) => (
+    <div className="card m-1 p-2 h-100" onClick={() => toggleSelected(id)}>
+        <div className={`card-body ${selected.includes(id) ? 'selected' : ''}`}>
+            <h5 className="card-title">{course.term} CS {course.number}</h5>
+            <p className="card-text">{course.title}</p>
         </div>
-    );
-}
+        <div className="card-footer bg-white">
+            <p className="card-text">{course.meets}</p>
+        </div>
+    </div>
+);
+
 
 export default Course;

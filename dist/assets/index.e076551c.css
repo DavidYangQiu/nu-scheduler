@@ -1,4 +1,4 @@
-@charset "UTF-8";body{margin:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}code{font-family:source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace}.card.m-1.p-2 .card-title{width:120%;height:2vw;object-fit:center}.card.m-1.p-2 .card-text{width:100%;height:6vw;object-fit:center}.course-list{display:grid;grid-template-columns:repeat(auto-fill,16rem);column-gap:15px;row-gap:15px}/*!
+@charset "UTF-8";body{margin:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}code{font-family:source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace}.card.m-1.p-2 .card-title{width:120%;height:2vw;object-fit:center}.card.m-1.p-2 .card-text{width:100%;height:6vw;object-fit:center}/*!
 * Bootstrap  v5.2.1 (https://getbootstrap.com/)
 * Copyright 2011-2022 The Bootstrap Authors
 * Copyright 2011-2022 Twitter, Inc.

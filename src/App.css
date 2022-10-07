@@ -40,3 +40,14 @@
 button {
   font-size: calc(10px + 2vmin);
 }
+
+
+.course-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 14rem);
+}
+
+.card .selected {
+  background-color:lemonchiffon;
+  color: green;
+}
