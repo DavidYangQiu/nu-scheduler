@@ -6,6 +6,8 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useJsonQuery } from './utilities/fetch'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import TermPage from './components/CourseList';
+import logo from './logo.svg';
+
 
 //import pageFilter from "./Components/pageFilter";
 
