@@ -7,6 +7,8 @@ import { useJsonQuery } from './utilities/fetch'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import TermPage from './components/CourseList';
 import logo from './logo.svg';
+import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
+import CourseForm from './components/CourseForm';
 
 
 //import pageFilter from "./Components/pageFilter";
@@ -80,11 +82,21 @@ const Main = () => {
     <div className="container">
       <h1>{data.title} </h1> 
       
-      <TermPage courses={data.courses} />
+      {/* <TermPage courses={data.courses} /> */}
+      <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<TermPage courses={schedule.courses} />} />
+                <Route path="/course/:id/edit" element={<CourseEditFormUrl courses={schedule.courses} />}/>
+              </Routes>
+            </BrowserRouter>
     </div>
   );
 }
 const queryClient = new QueryClient();
+const CourseEditFormUrl = ({courses}) => {
+  const {id} = useParams();
+  return <CourseForm courses={courses} id={id} />;  
+}
 
 const App = () => {
   return (
