@@ -2,19 +2,23 @@
 import { useCallback, useEffect, useState } from 'react';
 import { initializeApp } from "firebase/app";
 import { getDatabase, onValue, ref, update } from 'firebase/database';
+import { getAnalytics } from "firebase/analytics";
+
 
 const firebaseConfig = {
-    apiKey: "AIzaSyD_Sw8RqdhGeBckxYUQsc8aMf2eG0mEpxY",
-    authDomain: "react-tutorial-c6d28.firebaseapp.com",
-    projectId: "react-tutorial-c6d28",
-    storageBucket: "react-tutorial-c6d28.appspot.com",
-    messagingSenderId: "263923099063",
-    appId: "1:263923099063:web:d09ca2492c7d2a9a67f432",
-    measurementId: "G-BBN948PSY0"
+  apiKey: "AIzaSyDQ6btMnK0zEk9XAKBmnPEHVW-QT5Qjaik",
+  authDomain: "nu-schedule-e072e.firebaseapp.com",
+  databaseURL: "https://nu-schedule-e072e-default-rtdb.firebaseio.com",
+  projectId: "nu-schedule-e072e",
+  storageBucket: "nu-schedule-e072e.appspot.com",
+  messagingSenderId: "603223146719",
+  appId: "1:603223146719:web:5653b9cd1edeead46f296a",
+  measurementId: "G-CGKY4ENMHQ"
 };
 
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 const database = getDatabase(firebase);
 
 export const useDbData = (path) => {

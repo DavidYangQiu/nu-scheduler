@@ -68,7 +68,10 @@ import { useDbData } from './utilities/firebase';
 //   </div>
 // );
 
-
+const CourseEditFormUrl = ({courses}) => {
+  const {id} = useParams();
+  return <CourseForm courses={courses.courses} id={id} />;  
+}
 
 const Main = () => {
   //const [data, isLoading, error] = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
@@ -80,14 +83,17 @@ const Main = () => {
   if (schedule === undefined) return <h1>Loading data...</h1>;
   if (!data) return <h1>No user data found</h1>;
 
-  return (
-    <div className="container">
-      <h1>{data.title} </h1> 
-      
-      <TermPage courses={data.courses} />
-    </div>
-  );
+  return  <div className="container">
+            <Banner title={schedule.title}/>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<TermPage courses={schedule.courses.courses} />} />
+                <Route path="/course/:id/edit" element={<CourseEditFormUrl courses={schedule.courses} />}/>
+              </Routes>
+            </BrowserRouter>
+          </div>;
 }
+
 const queryClient = new QueryClient();
 
 const App = () => {
