@@ -1,6 +1,7 @@
 import Course from './Course';
 import { useState } from "react";
-import  Modal  from './Modal';
+import Modal from './Modal';
+import CoursePlan from './CoursePlan';
 import { timeConflict } from '../utilities/conflict';
 import { NavLink } from 'react-router-dom';
 import { signInWithGoogle, signOut, useAuthState } from '../utilities/firebase';
@@ -36,78 +37,6 @@ const TermButton = ({term, selection, setSelection}) => (
   </div>
 );
 
-// const TermSelector = ({selection, setSelection}) => (
-//   <div className="btn-group">
-//     { 
-//       Object.keys(terms).map(term => <TermButton key={term} term={term} selection={selection} setSelection={setSelection} />)
-//     }
-//   </div>
-// );
-
-// const Term = ({selection}) => (
-//   <div className="card" >
-//   { terms[selection] }
-//   </div>
-// );
-
-// const TermPage = ({courses}) => {
-//   const [selection, setSelection] = useState(() => Object.keys(terms)[0]);
-//   const [selected, setSelected] = useState([]);
-//   const toggleSelected = (course) => setSelected(
-//     selected.includes(course) 
-//     ? selected.filter(x => x !== course)
-//     : [...selected, course]
-//   );
-  
-//   return (
-//     <div>
-//       <TermSelector selection={selection} setSelection={setSelection} />
-//       <div className="course-list">
-//         {
-//           Object.entries(courses).filter(course => course[1].term === selection).map(([name, course]) => 
-//             <Course course={course} key={name} id = {name} selected={selected} toggleSelected={toggleSelected} />)
-//         };
-//       </div>
-//     </div>
-//   );
-// }
-// // const TermPage = ({courses}) => {
-// //   const [selection, setSelection] = useState(() => Object.keys(terms)[0]);
-// //   const [selected, setSelected] = useState([]);
-// //   const toggleSelected = (course) => {
-// //     setSelected(
-// //     selected.includes(course) 
-// //     ? selected.filter(x => x !== course) 
-// //     : selectedConflict(course) ? selected
-// //     : [...selected, course] 
-// //   )};
-
-// //   const selectedConflict = (course) => {
-// //     // console.log(selected.filter(selectedCourse => timeConflict(course, selectedCourse)));
-// //     // console.log(selected);
-// //     return selected.filter(selectedCourse => timeConflict(course, selectedCourse)).length > 0;
-// //   }
-// //   const [open, setOpen] = useState(false);
-// //   const openModal = () => setOpen(true);
-// //   const closeModal = () => setOpen(false);
-// //   return (
-// //     <div>
-// //       <div className="d-flex justify-content-between">
-// //         <TermSelector selection={selection} setSelection={setSelection} />
-// //         <button className="ms-auto btn btn-primary" onClick={openModal}>Course Selection</button>
-// //       </div>
-// //       <div className="course-list">
-// //         {
-// //           Object.entries(courses).filter(course => course[1].term === selection).map(([name, course]) => 
-// //             <Course course={course} key={name} id = {course.title} selected={selected} toggleSelected={toggleSelected} conflicted={selectedConflict(course)}/>)
-// //         };
-// //       </div>
-// //       <Modal open={open} close={closeModal}>
-// //         <CoursePlan courses={Object.entries(courses).filter(([id, course]) => selected.includes(course))} />
-// //       </Modal>
-// //     </div>
-// //   );
-// // }
 const TermSelector = ({selection, setSelection}) => (
   <div className="btn-group">
     { 
@@ -115,7 +44,8 @@ const TermSelector = ({selection, setSelection}) => (
     }
   </div>
 );
-const TermPage = ({courses}) => {
+
+const TermPage = ({courses, profile}) => {
   const [selection, setSelection] = useState(() => Object.keys(terms)[0]);
   const [selected, setSelected] = useState([]);
   const toggleSelected = (course) => {
@@ -125,6 +55,8 @@ const TermPage = ({courses}) => {
     : selectedConflict(course) ? selected
     : [...selected, course] 
   )};
+
+  console.log(profile?.isAdmin);
   const selectedConflict = (course) => {
     // console.log(selected.filter(selectedCourse => timeConflict(course, selectedCourse)));
     // console.log(selected);
@@ -143,7 +75,8 @@ const TermPage = ({courses}) => {
       <div className="course-list">
         {
           Object.entries(courses).filter(course => course[1].term === selection).map(([name, course]) => 
-            <Course course={course} key={name} id = {name} selected={selected} toggleSelected={toggleSelected} conflicted={selectedConflict(course)}/>)
+            <Course course={course} key={name} id = {name} selected={selected} 
+            toggleSelected={toggleSelected} profile = {profile} conflicted={selectedConflict(course)}/>)
         };
       </div>
       <Modal open={open} close={closeModal}>

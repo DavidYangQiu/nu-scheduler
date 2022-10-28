@@ -1,5 +1,4 @@
 import { useFormData } from '../utilities/useFormData';
-import { useNavigate } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDbUpdate } from '../utilities/firebase';
 const validateUserData = (key, val) => {
