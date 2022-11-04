@@ -25,7 +25,7 @@ const ButtonBar = ({message, disabled}) => {
   const navigate = useNavigate();
   return (
     <div className="d-flex">
-      <button type="button" className="btn btn-outline-dark me-2" onClick={() => navigate(-1)}>Cancel</button>
+      <button type="button" className="btn btn-outline-dark me-2"  onClick={() => navigate(-1)}>Cancel</button>
       <button type="submit" className="btn btn-primary me-auto" disabled={disabled}>Submit</button>
       <span className="p-2">{message}</span>
     </div>
