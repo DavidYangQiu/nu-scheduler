@@ -18,7 +18,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const database = getDatabase(firebase);
 
 export const useDbData = (path) => {
@@ -63,7 +62,7 @@ export { firebaseSignOut as signOut };
 
 export const useAuthState = () => {
   const [user, setUser] = useState();
-
+  
   useEffect(() => (
     onAuthStateChanged(getAuth(firebase), setUser)
   ));

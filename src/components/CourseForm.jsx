@@ -55,3 +55,5 @@ const CourseForm = ({courses, id}) => {
     </form>
   )
 };
+
+export default CourseForm;

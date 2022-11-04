@@ -1,50 +1,43 @@
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useProfile } from './utilities/profile';
+import { useJsonQuery } from './utilities/fetch';
+import { useDbData } from "./utilities/firebase"
+import TermPage from './components/termPage';
+import EditForm from './components/editForm'
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import './App.css';
-import logo from './logo.svg';
-import Banner from './components/Banner';
-import TermPage from './components/CourseList';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useJsonQuery } from './utilities/fetch';
-import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
-import CourseForm from './components/CourseForm';
-import { useDbData } from './utilities/firebase';
-import { useProfile } from './utilities/profile';
+
 const queryClient = new QueryClient();
 
-const CourseEditFormUrl = ({courses}) => {
-  const {id} = useParams();
-  return <CourseForm courses={courses.courses} id={id} />;  
-}
-
 const Main = () => {
-  const [schedule, error] = useDbData('/');
+  const [data, error] = useDbData("/");
   const [profile, profileLoading, profileError] = useProfile();
+  
+  if(error)      return <h1>Error loading the course list: {`${error}`}</h1>;
+  if(!data)      return <h1>Failed to find the course list</h1>;
+
   if (profileError) return <h1>Error loading profile: {`${profileError}`}</h1>;
   if (profileLoading) return <h1>Loading user profile</h1>;
   if (!profile) return <h1>No profile data</h1>;
 
-  if (error) return <h1>Error loading user data: {`${error}`}</h1>;
-  if (schedule === undefined) return <h1>Loading data...</h1>;
-  if (!schedule) return <h1>No user data found</h1>;
-
-  return  <div className="container">
-            <Banner title={schedule.title}/>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<TermPage courses={schedule.courses.courses} profile={profile}/>} />
-                <Route path="/course/:id/edit" element={<CourseEditFormUrl courses={schedule.courses}/>}/>
-              </Routes>
-            </BrowserRouter>
-          </div>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<TermPage profile={profile} title={data.title} courses={data.courses} />} />
+        <Route path="/edit/:id" element={<EditForm courses={data.courses} />} />
+      </Routes>
+		</BrowserRouter>
+  );
 }
 
 const App = () => {
   return (
-  <QueryClientProvider client={queryClient}>
-    <Main />
-  </QueryClientProvider>
+    <QueryClientProvider client={queryClient} contextSharing={true}>
+      <Main />
+    </QueryClientProvider>
   );
 };
 

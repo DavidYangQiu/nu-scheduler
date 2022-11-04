@@ -1,23 +1,31 @@
 .modal {
     display: block;
     visibility: hidden;
+    color:  #d63384;
+    border-color: antiquewhite;
+
   }
-
+  
   .modal-show {
+    display: block !important;
     visibility:visible;
-    background-color: rgba(169, 169, 169, 0.8);
+    background-color: rgba(198, 8, 215, 0.8);
+    color:  #d63384;
     transition: opacity 0.2s linear; 
+    border-color: antiquewhite;
   } 
-
+  
   .modal-content  {
     opacity: 0; 
   }
-
+  
   .modal-show .modal-content  {
     opacity: 1; 
     transition: 0.2s linear; 
+    color:  #d63384;
   }
-
+  
   .modal-header {
     margin-left: auto;
+    color:  #d63384;
   }
