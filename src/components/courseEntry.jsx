@@ -17,7 +17,7 @@ const courseEntry = ({cid, term, number, meets, title, active, disabled, editabl
         {
           editable &&
           <Link to={`/edit/${cid}`} >
-            <button type="button" className="btn btn-outline-dark me-2">Edit</button>
+            <button type="button" className="btn btn-outline-dark me-2" >Edit</button>
           </Link>
         }
       </div>

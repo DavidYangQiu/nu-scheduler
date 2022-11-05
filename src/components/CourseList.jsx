@@ -22,6 +22,7 @@ const CourseList = ({courses, selected, toggleSelected, editable}) => {
               isMeetConflict(courses[e].meets, course.meets)
             )
           }
+          
           editable={editable}
           onClick={()=>toggleSelected(id)}
         />)

@@ -14,7 +14,7 @@ const terms = {
 const TermButton = ({term, selection, setSelection}) => (
   <div>
     <input type="radio" id={term} className="btn-check" checked={term === selection} autoComplete="off" onChange={() => setSelection(term)} />
-    <label className="btn btn-success m-1 p-2" htmlFor={term}>
+    <label className="btn btn-success m-1 p-2" htmlFor={term} data-cy={term} >
       { term }
     </label>
   </div>
@@ -62,9 +62,9 @@ const TermPage = ({title, courses, profile}) => {
       <div className="d-flex">
         <TermSelector selection={term} setSelection={setTerm} />
 
-        <button type="button" className="ms-auto btn btn-succes " onClick={() => signInWithGoogle()}>Log In</button>
-				<button type="button" className="ms-auto btn btn-succes " onClick={() => signOut()}>Log Out</button> 
-        <button type="button" className="ms-auto btn btn-succes " onClick={openSelectedModal}>
+        <button type="button" className="ms-auto btn btn-succes " data-cy={term} onClick={() => signInWithGoogle()}>Log In</button>
+				<button type="button" className="ms-auto btn btn-succes " data-cy={term} onClick={() => signOut()}>Log Out</button> 
+        <button type="button" className="ms-auto btn btn-succes " data-cy={term} onClick={openSelectedModal}>
           course plan
         </button>
       </div>
