@@ -1,9 +1,11 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { initializeApp } from "firebase/app";
-import { getDatabase, onValue, ref, update } from 'firebase/database';
+//import { getDatabase, onValue, ref, update } from 'firebase/database';
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
+// import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
+import { getDatabase, onValue, ref, update, connectDatabaseEmulator } from "firebase/database";
+import { connectAuthEmulator, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signInWithCredential, signOut } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQ6btMnK0zEk9XAKBmnPEHVW-QT5Qjaik",
@@ -19,6 +21,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
 const database = getDatabase(firebase);
+//elumator
+const auth = getAuth(firebase);
+
 
 export const useDbData = (path) => {
   const [data, setData] = useState();
@@ -69,3 +74,14 @@ export const useAuthState = () => {
 
   return [user];
 };
+
+if (!window.EMULATION && import.meta.env.VITE_EMULATE) {
+  connectAuthEmulator(auth, "http://127.0.0.1:9099");
+  connectDatabaseEmulator(database, "127.0.0.1", 9000);
+
+  signInWithCredential(auth, GoogleAuthProvider.credential(
+    '{"sub": "12wPhjF5djdHvCqQkvUGx2z0X4rB", "email": "tester@gmail.com", "displayName":"Test User", "email_verified": true}'
+  ));
+
+  window.EMULATION = true;
+}
